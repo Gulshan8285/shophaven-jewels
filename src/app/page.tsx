@@ -7,7 +7,6 @@ import CustomerVideoReviews from '@/components/storefront/CustomerVideoReviews';
 import { 
   Sparkles, 
   ArrowRight, 
-  Flame, 
   Truck, 
   RotateCcw, 
   Banknote,
@@ -64,39 +63,6 @@ export default async function HomePage() {
       {/* 2. Editorial Luxury Hero Stage with Interactive Video Showcase */}
       <section className="relative px-3 sm:px-6 lg:px-8 pt-3 pb-8 sm:py-6 max-w-7xl mx-auto w-full">
         <HeroVideoShowcase />
-      </section>
-
-      {/* 3. Limited Festive Drop Countdown Ticker */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-        <div className="bg-gradient-to-r from-red-950 via-red-900 to-amber-950 rounded-2xl p-4 sm:p-5 text-white shadow-md flex flex-col md:flex-row items-center justify-between gap-4 font-mono">
-          <div className="flex items-center gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-              <Flame className="w-5 h-5 text-amber-400" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2.5">
-                <span className="text-xs font-bold uppercase tracking-widest text-amber-400 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-                  ROYAL FESTIVE JEWELLERY DROP
-                </span>
-                <span className="text-[10px] bg-white/20 text-white px-2 py-0.5 rounded font-bold">
-                  LIMITED TIME // CODE APPLIED
-                </span>
-              </div>
-              <p className="text-xs text-stone-200 mt-0.5">
-                Apply Code <strong className="text-white underline">FIRST100</strong> for Flat ₹100 OFF | Code <strong className="text-white underline">FESTIVE15</strong> for 10% OFF on bridal & kundan pieces!
-              </p>
-            </div>
-          </div>
-
-          <Link
-            href="/shop"
-            className="px-6 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold text-xs uppercase tracking-wider transition-all shrink-0 active:scale-95 shadow-xs flex items-center gap-1.5"
-          >
-            <span>CLAIM VOUCHERS</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
       </section>
 
       {/* 4. Trending Now Collection Grid (Nothing OS Dot-Matrix Header + Exact Pixel Alignments) */}
