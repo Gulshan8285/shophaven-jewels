@@ -7,9 +7,7 @@ import {
   Banknote, 
   Mail, 
   Phone, 
-  MapPin,
-  ExternalLink,
-  LayoutDashboard
+  MapPin
 } from 'lucide-react';
 
 export default function Footer() {
@@ -117,7 +115,7 @@ export default function Footer() {
                 <Link href="/category/bridal-heritage" className="hover:text-stone-900 transition-colors">Bridal & Heritage Sets</Link>
               </li>
               <li>
-                <Link href="/category/oxidised-bohemian" className="hover:text-stone-900 transition-colors">Oxidised & Boho Silver</Link>
+                <Link href="/category/oxidised-boho" className="hover:text-stone-900 transition-colors">Oxidised & Boho Silver</Link>
               </li>
               <li>
                 <Link href="/shop" className="hover:text-[#b91c1c] transition-colors font-bold text-stone-900">Browse Full Catalog (56+) →</Link>
@@ -152,7 +150,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Legal / Admin */}
+          {/* Legal / Policies */}
           <div>
             <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 mb-4">
               [ ARCHIVE CONTROL ]
@@ -179,38 +177,43 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Trust Badges & Gateway Alignment (Clean flex layout) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 border-t border-[#e6e2d8] flex flex-wrap items-center justify-center sm:justify-between gap-3 text-xs">
-        <div className="flex flex-wrap items-center justify-center gap-2">
-          <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
-            100% CASH ON DELIVERY (COD)
-          </span>
-          <span className="px-3 py-1 rounded-full bg-white border border-[#e6e2d8] text-stone-700 text-[11px] font-bold shadow-2xs">
-            ⚡ VERIFIED UPI • GOOGLE PAY • PHONEPE • PAYTM
-          </span>
-          <span className="px-3 py-1 rounded-full bg-white border border-[#e6e2d8] text-stone-700 text-[11px] font-bold shadow-2xs">
-            💳 ALL MAJOR CARDS & NETBANKING
-          </span>
-          <span className="px-3 py-1 rounded-full bg-white border border-[#e6e2d8] text-stone-700 text-[11px] font-bold shadow-2xs">
-            🔒 256-BIT SSL SECURE
-          </span>
+      {/* 4 Trust Value Badges in Infinite Scrolling Marquee */}
+      <div className="w-full border-t border-[#e6e2d8] bg-white py-3.5 overflow-hidden select-none">
+        <div className="animate-marquee items-center gap-4 text-xs font-mono">
+          {[0, 1].map((loopIdx) => (
+            <div key={loopIdx} className="flex items-center gap-3 sm:gap-4 shrink-0 pr-3 sm:pr-4">
+              <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold flex items-center gap-2 shadow-2xs whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                100% CASH ON DELIVERY (COD)
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#faf8f5] border border-[#e6e2d8] text-stone-800 text-[11px] font-bold shadow-2xs whitespace-nowrap">
+                ⚡ VERIFIED UPI • GOOGLE PAY • PHONEPE • PAYTM
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#faf8f5] border border-[#e6e2d8] text-stone-800 text-[11px] font-bold shadow-2xs whitespace-nowrap">
+                💳 ALL MAJOR CARDS &amp; NETBANKING
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-[#faf8f5] border border-[#e6e2d8] text-stone-800 text-[11px] font-bold shadow-2xs whitespace-nowrap">
+                🔒 256-BIT SSL SECURE
+              </span>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Designer Credit (Explicitly requested: Created & Designed by codeorbit.cloud) */}
-        <div className="flex items-center gap-2 text-stone-500 text-[11px] pt-2 sm:pt-0">
-          <p>© 2026 ShopHaven Jewels.</p>
-          <span>•</span>
+      {/* Clean, Perfectly Formatted Copyright & Designer Credit for Mobile and Laptop */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 border-t border-[#e6e2d8] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-xs font-mono text-stone-500">
+        <p>© 2026 ShopHaven Jewels. All Rights Reserved.</p>
+        <p>
+          Created &amp; Designed by{' '}
           <a
             href="https://codeorbit.cloud"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-stone-900 hover:text-[#b91c1c] font-bold transition-colors"
+            className="font-bold text-stone-900 hover:text-[#b91c1c] underline underline-offset-4 decoration-stone-300 hover:decoration-[#b91c1c] transition-colors"
           >
-            <span>Created &amp; Designed by codeorbit.cloud</span>
-            <ExternalLink className="w-3 h-3 text-[#b91c1c]" />
+            codeorbit.cloud
           </a>
-        </div>
+        </p>
       </div>
     </footer>
   );

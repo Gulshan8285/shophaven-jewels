@@ -73,7 +73,7 @@ export default function Header() {
     { name: 'Bangles & Kadas', slug: 'bangles-kadas' },
     { name: 'Mangalsutras', slug: 'mangalsutras-pendants' },
     { name: 'Bridal Sets', slug: 'bridal-heritage', badge: 'EXCLUSIVE' },
-    { name: 'Oxidised Silver', slug: 'oxidised-bohemian' },
+    { name: 'Oxidised Silver', slug: 'oxidised-boho' },
   ];
 
   return (
@@ -356,13 +356,6 @@ export default function Header() {
           </div>
 
           <div className="pt-3 border-t border-stone-100 flex flex-col gap-2 text-xs">
-            <Link
-              href="/admin"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-2 text-[#b91c1c] font-bold flex items-center gap-2"
-            >
-              <LayoutDashboard className="w-4 h-4" /> [ ADMIN CONTROL PANEL ]
-            </Link>
             <Link
               href="/track-order"
               onClick={() => setMobileMenuOpen(false)}

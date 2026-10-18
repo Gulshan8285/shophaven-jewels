@@ -147,7 +147,8 @@ export async function getShopData(params: {
   }
 
   if (category) {
-    filtered = filtered.filter((p) => p.category?.slug === category);
+    const normalizedCat = category === 'oxidised-bohemian' ? 'oxidised-boho' : category;
+    filtered = filtered.filter((p) => p.category?.slug === normalizedCat || p.category?.slug === category);
   }
 
   if (brand) {
@@ -224,8 +225,9 @@ export async function getProductBySlug(slug: string) {
 export async function getCategoryBySlug(slug: string) {
   if (!isLocalhostOnVercel) {
     try {
-      const category = await prisma.category.findUnique({
-        where: { slug },
+      const normalizedSlug = slug === 'oxidised-bohemian' ? 'oxidised-boho' : slug;
+      let category = await prisma.category.findUnique({
+        where: { slug: normalizedSlug },
         include: {
           products: {
             where: { isActive: true },
@@ -239,6 +241,23 @@ export async function getCategoryBySlug(slug: string) {
         },
       });
 
+      if (!category && slug !== normalizedSlug) {
+        category = await prisma.category.findUnique({
+          where: { slug },
+          include: {
+            products: {
+              where: { isActive: true },
+              include: {
+                brand: true,
+                images: { orderBy: { displayOrder: 'asc' }, take: 1 },
+                reviews: { where: { isApproved: true }, select: { rating: true } },
+              },
+              orderBy: { createdAt: 'desc' },
+            },
+          },
+        });
+      }
+
       if (category) return category;
     } catch (err) {
       console.warn('Database query failed in getCategoryBySlug, using fallback catalog:', err);
@@ -247,7 +266,8 @@ export async function getCategoryBySlug(slug: string) {
 
   // Fallback
   const categories = (fallbackData.categories as any[]) || [];
-  const cat = categories.find((c) => c.slug === slug);
+  const normalizedSlug = slug === 'oxidised-bohemian' ? 'oxidised-boho' : slug;
+  const cat = categories.find((c) => c.slug === normalizedSlug || c.slug === slug);
   if (!cat) return null;
 
   const allProducts = (fallbackData.products as any[]) || [];

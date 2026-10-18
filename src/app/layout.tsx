@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Space_Grotesk, Geist_Mono, Geist } from 'next/font/google';
+import { Space_Grotesk, Geist_Mono, Geist, Silkscreen } from 'next/font/google';
 import './globals.css';
 import Providers from '@/components/Providers';
 import LayoutShell from '@/components/LayoutShell';
@@ -19,6 +19,12 @@ const geistSans = Geist({
   subsets: ['latin'],
 });
 
+const silkscreen = Silkscreen({
+  weight: ['400', '700'],
+  variable: '--font-silkscreen',
+  subsets: ['latin'],
+});
+
 export const metadata: Metadata = {
   title: 'SHOPHAVEN (1) — Direct Artisan Collective & Factory Catalog',
   description: 'Authentic Indian ethnic wear, sarees, home textiles & electronics directly from verified weaver guilds. Transparent pricing, Cash on Delivery.',
@@ -31,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} ${geistSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.variable} ${geistMono.variable} ${geistSans.variable} ${silkscreen.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans bg-[#faf8f5] text-[#141416] selection:bg-[#b91c1c] selection:text-white">
         <Providers>
           <LayoutShell>{children}</LayoutShell>

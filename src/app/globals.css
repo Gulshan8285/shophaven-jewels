@@ -43,9 +43,28 @@
   }
 
   .font-ndot {
-    font-family: 'Silkscreen', monospace;
+    font-family: var(--font-silkscreen), 'Silkscreen', monospace;
     letter-spacing: 0.05em;
   }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 /* Creamy Luxury Dot Matrix & Glyph Textures */

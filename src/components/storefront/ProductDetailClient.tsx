@@ -287,7 +287,15 @@ export default function ProductDetailClient({ product, relatedProducts = [] }: P
                       : 'border-[#e6e2d8] hover:border-stone-400 opacity-70 hover:opacity-100'
                   }`}
                 >
-                  <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
+                  <img
+                    src={imgUrl}
+                    alt="Thumbnail"
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=400&q=80';
+                    }}
+                  />
                 </button>
               ))}
             </div>
@@ -299,6 +307,10 @@ export default function ProductDetailClient({ product, relatedProducts = [] }: P
               src={images[selectedImageIndex]}
               alt={product.title}
               className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src =
+                  'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80';
+              }}
             />
             {discount > 0 && (
               <span className="absolute top-4 left-4 bg-[#b91c1c] text-white font-mono font-bold text-xs px-3 py-1 rounded-xl shadow-md uppercase tracking-wider">
