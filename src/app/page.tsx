@@ -50,10 +50,6 @@ export default async function HomePage() {
                   src={c.image || 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=300&q=80'}
                   alt={c.name}
                   className="w-full h-full rounded-xl object-cover filter brightness-95 group-hover:brightness-100 transition-all"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).src =
-                      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=300&q=80';
-                  }}
                 />
               </div>
               <span className="text-[11px] font-semibold text-stone-700 group-hover:text-[#b91c1c] transition-colors truncate max-w-[85px] text-center uppercase tracking-wider">
