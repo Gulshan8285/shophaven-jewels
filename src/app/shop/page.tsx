@@ -6,6 +6,8 @@ import SortSelect from '@/components/storefront/SortSelect';
 import { SlidersHorizontal, Search, ChevronRight, X, Cpu, Layers } from 'lucide-react';
 import { Prisma } from '@prisma/client';
 
+import { getShopData } from '@/lib/catalogService';
+
 export const dynamic = 'force-dynamic';
 
 interface ShopPageProps {
@@ -28,72 +30,13 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const minPrice = params.minPrice ? parseInt(params.minPrice) * 100 : undefined;
   const maxPrice = params.maxPrice ? parseInt(params.maxPrice) * 100 : undefined;
 
-  // Build Prisma where query
-  const where: Prisma.ProductWhereInput = {
-    isActive: true,
-  };
-
-  if (q) {
-    where.OR = [
-      { title: { contains: q, mode: 'insensitive' } },
-      { description: { contains: q, mode: 'insensitive' } },
-      { tags: { contains: q, mode: 'insensitive' } },
-      { sku: { contains: q, mode: 'insensitive' } },
-    ];
-  }
-
-  if (categorySlug) {
-    where.category = { slug: categorySlug };
-  }
-
-  if (brandSlug) {
-    where.brand = { slug: brandSlug };
-  }
-
-  if (minPrice !== undefined || maxPrice !== undefined) {
-    where.sellingPrice = {};
-    if (minPrice !== undefined) where.sellingPrice.gte = minPrice;
-    if (maxPrice !== undefined) where.sellingPrice.lte = maxPrice;
-  }
-
-  // Sorting
-  let orderBy: Prisma.ProductOrderByWithRelationInput = { createdAt: 'desc' };
-  if (sort === 'price_asc') orderBy = { sellingPrice: 'asc' };
-  else if (sort === 'price_desc') orderBy = { sellingPrice: 'desc' };
-  else if (sort === 'bestseller') orderBy = { isBestseller: 'desc' };
-  else if (sort === 'trending') orderBy = { isTrending: 'desc' };
-
-  // Fetch products
-  const products = await prisma.product.findMany({
-    where,
-    orderBy,
-    include: {
-      brand: true,
-      category: true,
-      images: {
-        orderBy: { displayOrder: 'asc' },
-        take: 1,
-      },
-      reviews: {
-        where: { isApproved: true },
-        select: { rating: true },
-      },
-    },
-  });
-
-  const categories = await prisma.category.findMany({
-    where: { isActive: true },
-    orderBy: { name: 'asc' },
-    include: {
-      _count: {
-        select: { products: true },
-      },
-    },
-  });
-
-  const brands = await prisma.brand.findMany({
-    where: { isActive: true },
-    orderBy: { name: 'asc' },
+  const { products, categories, brands, totalCount } = await getShopData({
+    q,
+    category: categorySlug,
+    brand: brandSlug,
+    sort,
+    minPrice,
+    maxPrice,
   });
 
   return (
@@ -271,10 +214,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-              {products.map((product) => {
+              {products.map((product: any) => {
                 const avgRating =
-                  product.reviews.length > 0
-                    ? product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length
+                  product.reviews && product.reviews.length > 0
+                    ? product.reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / product.reviews.length
                     : 4.8;
 
                 return (

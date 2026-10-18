@@ -6,6 +6,8 @@ import ProductCard from '@/components/storefront/ProductCard';
 import { Sparkles, ArrowRight, ChevronRight, Cpu } from 'lucide-react';
 import type { Metadata } from 'next';
 
+import { getCategoryBySlug } from '@/lib/catalogService';
+
 export const dynamic = 'force-dynamic';
 
 interface CategoryPageProps {
@@ -14,9 +16,7 @@ interface CategoryPageProps {
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const category = await prisma.category.findUnique({
-    where: { slug },
-  });
+  const category = await getCategoryBySlug(slug);
 
   if (!category) {
     return { title: 'Category Not Found | ShopHaven Direct' };
@@ -31,25 +31,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
 
-  const category = await prisma.category.findUnique({
-    where: { slug },
-    include: {
-      products: {
-        where: { isActive: true },
-        include: {
-          brand: true,
-          images: {
-            orderBy: { displayOrder: 'asc' },
-            take: 1,
-          },
-          reviews: {
-            where: { isApproved: true },
-            select: { rating: true },
-          },
-        },
-      },
-    },
-  });
+  const category = await getCategoryBySlug(slug);
 
   if (!category) {
     notFound();
@@ -112,10 +94,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {category.products.map((product) => {
+            {category.products.map((product: any) => {
               const avgRating =
-                product.reviews.length > 0
-                  ? product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length
+                product.reviews && product.reviews.length > 0
+                  ? product.reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / product.reviews.length
                   : 4.8;
 
               return (

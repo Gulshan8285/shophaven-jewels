@@ -6,18 +6,31 @@ import ProductsManagerClient from '@/components/admin/ProductsManagerClient';
 export default async function AdminProductsPage() {
   await checkAdminAccess();
 
-  const products = await prisma.product.findMany({
-    orderBy: { createdAt: 'desc' },
-    include: {
-      category: { select: { name: true } },
-      brand: { select: { name: true } },
-      supplier: { select: { name: true } },
-      images: {
-        where: { isPrimary: true },
-        take: 1,
+  let products: any[] = [];
+  try {
+    products = await prisma.product.findMany({
+      orderBy: { createdAt: 'desc' },
+      include: {
+        category: { select: { name: true } },
+        brand: { select: { name: true } },
+        supplier: { select: { name: true } },
+        images: {
+          where: { isPrimary: true },
+          take: 1,
+        },
       },
-    },
-  });
+    });
+  } catch (err) {
+    console.warn('DB query failed in AdminProductsPage, using fallback:', err);
+    const fallback = (await import('@/lib/catalogFallback.json')).default;
+    products = (fallback.products as any[]).map((p) => ({
+      ...p,
+      category: { name: p.category?.name || 'Jewellery' },
+      brand: { name: p.brand?.name || 'Karigar Guild' },
+      supplier: { name: 'Meesho Verified Supplier' },
+      images: p.images || [],
+    }));
+  }
 
   return (
     <div className="space-y-6">

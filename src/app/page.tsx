@@ -16,71 +16,12 @@ import {
   Cpu
 } from 'lucide-react';
 
+import { getHomePageData } from '@/lib/catalogService';
+
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  // 1. Fetch categories
-  const categories = await prisma.category.findMany({
-    where: { isActive: true },
-    orderBy: { displayOrder: 'asc' },
-    include: {
-      _count: {
-        select: { products: true },
-      },
-    },
-  });
-
-  // 2. Fetch trending products
-  const trendingProducts = await prisma.product.findMany({
-    where: { isActive: true, isTrending: true },
-    take: 8,
-    include: {
-      brand: true,
-      images: {
-        orderBy: { displayOrder: 'asc' },
-        take: 1,
-      },
-      reviews: {
-        where: { isApproved: true },
-        select: { rating: true },
-      },
-    },
-  });
-
-  // 3. Fetch bestsellers
-  const bestsellers = await prisma.product.findMany({
-    where: { isActive: true, isBestseller: true },
-    take: 8,
-    include: {
-      brand: true,
-      images: {
-        orderBy: { displayOrder: 'asc' },
-        take: 1,
-      },
-      reviews: {
-        where: { isApproved: true },
-        select: { rating: true },
-      },
-    },
-  });
-
-  // 4. Fallback if specific flags not populated
-  const allProducts = await prisma.product.findMany({
-    where: { isActive: true },
-    take: 12,
-    orderBy: { createdAt: 'desc' },
-    include: {
-      brand: true,
-      images: {
-        orderBy: { displayOrder: 'asc' },
-        take: 1,
-      },
-      reviews: {
-        where: { isApproved: true },
-        select: { rating: true },
-      },
-    },
-  });
+  const { categories, trendingProducts, bestsellers, allProducts } = await getHomePageData();
 
   return (
     <div className="flex flex-col min-h-screen bg-[#faf8f5] text-stone-900">
@@ -179,10 +120,10 @@ export default async function HomePage() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6 items-stretch">
-          {(trendingProducts.length > 0 ? trendingProducts : allProducts.slice(0, 4)).map((product) => {
+          {(trendingProducts.length > 0 ? trendingProducts : allProducts.slice(0, 4)).map((product: any) => {
             const avgRating =
-              product.reviews.length > 0
-                ? product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length
+              product.reviews && product.reviews.length > 0
+                ? product.reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / product.reviews.length
                 : 4.8;
 
             return (
@@ -338,10 +279,10 @@ export default async function HomePage() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6 items-stretch">
-          {(bestsellers.length > 0 ? bestsellers : allProducts).map((product) => {
+          {(bestsellers.length > 0 ? bestsellers : allProducts).map((product: any) => {
             const avgRating =
-              product.reviews.length > 0
-                ? product.reviews.reduce((acc, r) => acc + r.rating, 0) / product.reviews.length
+              product.reviews && product.reviews.length > 0
+                ? product.reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / product.reviews.length
                 : 4.9;
 
             return (

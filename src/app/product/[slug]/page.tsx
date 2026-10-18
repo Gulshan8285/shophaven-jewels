@@ -4,6 +4,8 @@ import prisma from '@/lib/prisma';
 import ProductDetailClient from '@/components/storefront/ProductDetailClient';
 import type { Metadata } from 'next';
 
+import { getProductBySlug } from '@/lib/catalogService';
+
 export const dynamic = 'force-dynamic';
 
 interface ProductPageProps {
@@ -12,18 +14,13 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = await prisma.product.findUnique({
-    where: { slug },
-    include: {
-      brand: true,
-      images: { take: 1 },
-    },
-  });
+  const res = await getProductBySlug(slug);
 
-  if (!product) {
+  if (!res?.product) {
     return { title: 'Product Not Found | ShopHaven' };
   }
 
+  const { product } = res;
   const priceRupees = (product.sellingPrice / 100).toFixed(0);
 
   return {
@@ -40,56 +37,20 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
-  const product = await prisma.product.findUnique({
-    where: { slug },
-    include: {
-      brand: true,
-      category: true,
-      images: {
-        orderBy: { displayOrder: 'asc' },
-      },
-      variants: {
-        where: { isActive: true },
-        orderBy: { title: 'asc' },
-      },
-      reviews: {
-        where: { isApproved: true },
-        orderBy: { createdAt: 'desc' },
-      },
-    },
-  });
+  const res = await getProductBySlug(slug);
 
-  if (!product) {
+  if (!res?.product) {
     notFound();
   }
 
-  // Fetch related/suggested products for the recommendations section
-  const relatedProducts = await prisma.product.findMany({
-    where: {
-      isActive: true,
-      id: { not: product.id },
-      categoryId: product.categoryId,
-    },
-    take: 4,
-    include: {
-      brand: true,
-      images: {
-        take: 1,
-        orderBy: { displayOrder: 'asc' },
-      },
-      reviews: {
-        where: { isApproved: true },
-        select: { rating: true },
-      },
-    },
-  });
+  const { product, relatedProducts } = res;
 
   // Schema.org structured data for SEO
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.title,
-    image: product.images.map((img) => img.url),
+    image: product.images?.map((img: any) => img.url) || [],
     description: product.shortDescription || product.description,
     sku: product.sku,
     brand: {
