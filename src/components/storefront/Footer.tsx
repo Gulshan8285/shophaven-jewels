@@ -171,13 +171,7 @@ export default function Footer() {
                 <Link href="/login" className="hover:text-stone-900 transition-colors">Customer Authentication</Link>
               </li>
               <li>
-                <Link
-                  href="/admin"
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-[#b91c1c]/10 border border-[#b91c1c]/30 hover:bg-[#b91c1c] hover:text-white text-[#b91c1c] transition-all font-bold text-xs"
-                >
-                  <LayoutDashboard className="w-3.5 h-3.5" />
-                  <span>Admin Control Panel</span>
-                </Link>
+                <Link href="/about" className="hover:text-stone-900 transition-colors">Artisan Quality Assurance</Link>
               </li>
             </ul>
           </div>
@@ -185,29 +179,37 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Designer Credit & Copyright (Explicitly requested: Created & Designed by codeorbit.cloud) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2 border-t border-[#e6e2d8] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-500">
-        
-        <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
-          <p>© 2026 ShopHaven Direct Commerce. All rights reserved.</p>
-          <span className="hidden sm:inline text-stone-300">•</span>
-          {/* Explicit User Credit */}
+      {/* Trust Badges & Gateway Alignment (Clean flex layout) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 border-t border-[#e6e2d8] flex flex-wrap items-center justify-center sm:justify-between gap-3 text-xs">
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold flex items-center gap-1.5 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            100% CASH ON DELIVERY (COD)
+          </span>
+          <span className="px-3 py-1 rounded-full bg-white border border-[#e6e2d8] text-stone-700 text-[11px] font-bold shadow-2xs">
+            ⚡ VERIFIED UPI • GOOGLE PAY • PHONEPE • PAYTM
+          </span>
+          <span className="px-3 py-1 rounded-full bg-white border border-[#e6e2d8] text-stone-700 text-[11px] font-bold shadow-2xs">
+            💳 ALL MAJOR CARDS & NETBANKING
+          </span>
+          <span className="px-3 py-1 rounded-full bg-white border border-[#e6e2d8] text-stone-700 text-[11px] font-bold shadow-2xs">
+            🔒 256-BIT SSL SECURE
+          </span>
+        </div>
+
+        {/* Designer Credit (Explicitly requested: Created & Designed by codeorbit.cloud) */}
+        <div className="flex items-center gap-2 text-stone-500 text-[11px] pt-2 sm:pt-0">
+          <p>© 2026 ShopHaven Jewels.</p>
+          <span>•</span>
           <a
             href="https://codeorbit.cloud"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-stone-800 hover:text-[#b91c1c] font-bold transition-colors"
+            className="inline-flex items-center gap-1 text-stone-900 hover:text-[#b91c1c] font-bold transition-colors"
           >
-            <span>Created & Designed by codeorbit.cloud</span>
+            <span>Created &amp; Designed by codeorbit.cloud</span>
             <ExternalLink className="w-3 h-3 text-[#b91c1c]" />
           </a>
-        </div>
-
-        <div className="flex items-center gap-2.5">
-          <span className="text-[10px] text-stone-400">[ GATEWAY: UPI / CARDS / NETBANKING / COD ]</span>
-          <span className="px-2 py-0.5 rounded bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold">
-            ● 100% COD AVAILABLE
-          </span>
         </div>
       </div>
     </footer>

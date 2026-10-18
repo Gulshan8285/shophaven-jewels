@@ -188,19 +188,31 @@ export default function CartDrawer() {
 
                       {/* Quantity & Price */}
                       <div className="flex items-center justify-between pt-2 font-mono">
-                        <div className="flex items-center border border-stone-300 rounded-lg bg-white">
+                        <div className="flex items-center border border-stone-300 rounded-xl bg-white shadow-xs overflow-hidden">
                           <button
-                            onClick={() => updateQuantity(item.productId, item.quantity - 1, item.variantId)}
-                            className="w-6 h-6 flex items-center justify-center text-stone-600 hover:text-stone-950 hover:bg-stone-100 rounded-l transition-colors cursor-pointer"
+                            type="button"
+                            onClick={() => {
+                              if (item.quantity <= 1) {
+                                removeItem(item.productId, item.variantId);
+                              } else {
+                                updateQuantity(item.productId, item.quantity - 1, item.variantId);
+                              }
+                            }}
+                            className="w-8 h-8 flex items-center justify-center text-stone-700 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer text-sm font-bold active:scale-95"
+                            title={item.quantity <= 1 ? "Remove from bag" : "Decrease quantity"}
+                            aria-label={item.quantity <= 1 ? "Remove from bag" : "Decrease quantity"}
                           >
-                            -
+                            {item.quantity <= 1 ? '✕' : '−'}
                           </button>
-                          <span className="w-7 text-center font-bold text-xs text-stone-900">
+                          <span className="w-8 text-center font-bold text-xs text-stone-900 select-none">
                             {item.quantity}
                           </span>
                           <button
+                            type="button"
                             onClick={() => updateQuantity(item.productId, item.quantity + 1, item.variantId)}
-                            className="w-6 h-6 flex items-center justify-center text-stone-600 hover:text-stone-950 hover:bg-stone-100 rounded-r transition-colors cursor-pointer"
+                            className="w-8 h-8 flex items-center justify-center text-stone-700 hover:text-stone-950 hover:bg-stone-100 transition-colors cursor-pointer text-sm font-bold active:scale-95"
+                            title="Increase quantity"
+                            aria-label="Increase quantity"
                           >
                             +
                           </button>

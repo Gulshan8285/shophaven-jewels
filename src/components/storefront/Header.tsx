@@ -113,35 +113,29 @@ export default function Header() {
           </div>
         </form>
 
-        {/* Right: Quick Links + Prominent ADMIN PANEL Link */}
-        <div className="flex items-center space-x-3 text-[10px] text-stone-600 shrink-0 uppercase tracking-wider">
-          <Link href="/track-order" className="hover:text-stone-950 transition-colors hidden lg:flex items-center gap-1 font-semibold">
-            <Package className="w-3 h-3 text-[#b91c1c]" /> [ TRACK ]
-          </Link>
-          <span className="text-stone-300 hidden lg:inline">|</span>
-          <Link href="/contact" className="hover:text-stone-950 transition-colors hidden sm:flex items-center gap-1 font-semibold">
-            <PhoneCall className="w-3 h-3 text-[#b91c1c]" /> [ 24/7 CARE ]
-          </Link>
+        {/* Right: Quick Links & Trust Badge (Admin panel removed from public view as requested) */}
+        <div className="flex items-center space-x-3 text-[10px] text-stone-600 shrink-0 uppercase tracking-wider font-mono">
+          <span className="text-emerald-800 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+            100% COD AVAILABLE
+          </span>
           <span className="text-stone-300 hidden sm:inline">|</span>
-          
-          {/* Prominent Admin Link */}
-          <Link
-            href="/admin"
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-950 hover:bg-[#b91c1c] text-white font-bold transition-all shadow-xs"
-            title="Open Admin Control Panel"
-          >
-            <LayoutDashboard className="w-3 h-3" />
-            <span>ADMIN PANEL</span>
+          <Link href="/track-order" className="hover:text-stone-950 transition-colors hidden md:flex items-center gap-1 font-semibold">
+            <Package className="w-3 h-3 text-[#b91c1c]" /> TRACK ORDER
+          </Link>
+          <span className="text-stone-300 hidden md:inline">|</span>
+          <Link href="/contact" className="hover:text-stone-950 transition-colors hidden sm:flex items-center gap-1 font-semibold">
+            <PhoneCall className="w-3 h-3 text-[#b91c1c]" /> 24/7 CARE
           </Link>
         </div>
       </div>
 
       {/* 2. Floating Card Header Dock (Creamy Luxury Island) */}
-      <header className="max-w-7xl mx-auto rounded-2xl bg-white/95 backdrop-blur-2xl border border-[#e6e2d8] shadow-md px-4 sm:px-6 py-2.5 transition-all">
-        <div className="flex items-center justify-between gap-4">
+      <header className="max-w-7xl mx-auto rounded-2xl bg-white/95 backdrop-blur-2xl border border-[#e6e2d8] shadow-md px-3 sm:px-6 py-2.5 transition-all">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Left: Mobile Toggle & Brand Logo */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -152,60 +146,79 @@ export default function Header() {
             </button>
 
             {/* Clean Brand Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-stone-950 text-amber-300 flex items-center justify-center font-bold text-xs shadow-sm group-hover:scale-105 transition-transform font-mono">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-stone-950 text-amber-300 flex items-center justify-center font-bold text-xs shadow-sm group-hover:scale-105 transition-transform font-mono shrink-0">
                 💎
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-base sm:text-lg tracking-tight text-stone-950 font-sans">
+                <div className="flex items-center gap-1">
+                  <span className="font-extrabold text-sm sm:text-lg tracking-tight text-stone-950 font-sans">
                     SHOPHAVEN JEWELS
                   </span>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#b91c1c] glyph-pulse" />
                 </div>
-                <span className="text-[8px] font-mono uppercase tracking-[0.2em] text-stone-500 -mt-0.5 font-bold">
+                <span className="text-[8px] font-mono uppercase tracking-[0.18em] text-stone-500 -mt-0.5 font-bold hidden sm:block">
                   ROYAL ATELIER • KARIGAR DIRECT
                 </span>
               </div>
             </Link>
           </div>
 
-          {/* Center: Single-Line Horizontal Navigation (NO WRAPPING) */}
+          {/* Center: Clean Simplified Single-Line Navigation */}
           <nav className="hidden lg:flex items-center space-x-6 text-xs font-mono font-medium text-stone-700 whitespace-nowrap overflow-x-auto scrollbar-none py-1">
             <Link
               href="/shop"
               className="hover:text-[#b91c1c] transition-colors flex items-center gap-1.5 text-stone-950 font-bold group"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-[#b91c1c]" />
-              <span>ALL CATALOG</span>
+              <span>ALL SHOP</span>
             </Link>
 
-            {categories.map((c) => (
-              <Link
-                key={c.slug}
-                href={`/category/${c.slug}`}
-                className="hover:text-[#b91c1c] transition-colors relative py-1 uppercase tracking-wider text-[11px] font-semibold text-stone-700 group"
-              >
-                <span>{c.name}</span>
-                {c.badge && (
-                  <span className="ml-1 px-1.5 py-0.2 rounded text-[8px] font-bold bg-red-50 text-[#b91c1c] border border-red-200">
-                    {c.badge}
-                  </span>
-                )}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#b91c1c] group-hover:w-full transition-all duration-200" />
-              </Link>
-            ))}
+            <Link
+              href="/category/necklaces-chokers"
+              className="hover:text-[#b91c1c] transition-colors py-1 uppercase tracking-wider text-[11px] font-semibold text-stone-700"
+            >
+              CHOKERS & SETS
+            </Link>
+
+            <Link
+              href="/category/earrings-jhumkas"
+              className="hover:text-[#b91c1c] transition-colors py-1 uppercase tracking-wider text-[11px] font-semibold text-stone-700"
+            >
+              JHUMKAS & EARRINGS
+            </Link>
+
+            <Link
+              href="/category/bangles-kadas"
+              className="hover:text-[#b91c1c] transition-colors py-1 uppercase tracking-wider text-[11px] font-semibold text-stone-700"
+            >
+              BANGLES & KADAS
+            </Link>
+
+            <Link
+              href="/category/bridal-heritage"
+              className="hover:text-[#b91c1c] transition-colors py-1 uppercase tracking-wider text-[11px] font-semibold text-stone-700"
+            >
+              BRIDAL SETS
+            </Link>
+
+            <Link
+              href="/shop?sort=bestseller"
+              className="hover:text-[#b91c1c] transition-colors py-1 uppercase tracking-wider text-[11px] font-bold text-[#b91c1c]"
+            >
+              BESTSELLERS
+            </Link>
           </nav>
 
-          {/* Right: Single Line Action Controls (Admin, Account, Bag) */}
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0 font-mono">
+          {/* Right: Mobile-Responsive Action Controls (Account & Bag) */}
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 font-mono">
             
-            {/* Account / Sign-In Button (Clean Single-Line Pill) */}
+            {/* Account / Sign-In Button (Compact & Aligned on Mobile) */}
             <div className="relative" ref={dropdownRef}>
               {user ? (
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                  className="flex items-center gap-1.5 py-1.5 px-3 rounded-full hover:bg-stone-100 border border-stone-200 text-xs font-bold text-stone-900 transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 py-1.5 px-2.5 sm:px-3 rounded-full hover:bg-stone-100 border border-stone-200 text-xs font-bold text-stone-900 transition-colors cursor-pointer"
                 >
                   <div className="w-5 h-5 rounded-full bg-stone-900 text-white font-bold flex items-center justify-center text-[10px]">
                     {user.name.charAt(0).toUpperCase()}
@@ -216,10 +229,11 @@ export default function Header() {
               ) : (
                 <Link
                   href="/login"
-                  className="py-1.5 px-3.5 rounded-full border border-stone-200 hover:border-stone-400 bg-stone-50 hover:bg-white text-stone-800 text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap"
+                  className="py-1.5 px-2.5 sm:px-3.5 rounded-full border border-stone-200 hover:border-stone-400 bg-stone-50 hover:bg-white text-stone-800 text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap"
+                  title="Sign In"
                 >
                   <User className="w-3.5 h-3.5 text-[#b91c1c]" />
-                  <span>SIGN IN</span>
+                  <span className="hidden sm:inline">SIGN IN</span>
                 </Link>
               )}
 

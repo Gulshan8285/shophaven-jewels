@@ -258,8 +258,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 7. Bestsellers Collection Grid */}
-      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      {/* 7. Customer Presence Video Reviews (Placed cleanly after details and before remaining collection) */}
+      <section className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-[#e6e2d8]">
+        <CustomerVideoReviews />
+      </section>
+
+      {/* 8. All-Time Bestsellers Collection Grid */}
+      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full border-t border-[#e6e2d8]">
         <div className="flex items-end justify-between mb-8 pb-3 border-b border-[#e6e2d8]">
           <div>
             <div className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-[#b91c1c]">
@@ -303,85 +308,6 @@ export default async function HomePage() {
               />
             );
           })}
-        </div>
-      </section>
-
-      {/* 8. Social Proof & Verified Buyer Reviews (Creamy Cards with Video Testimonials) */}
-      <section className="py-16 bg-[#f4f1ea]/60 border-t border-[#e6e2d8] font-mono">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          {/* Customer Video Reviews Reel */}
-          <CustomerVideoReviews />
-
-          <div className="text-center max-w-2xl mx-auto space-y-3 pt-6 border-t border-[#e6e2d8]">
-            <div className="flex justify-center gap-1 text-amber-500">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-amber-400" />
-              ))}
-            </div>
-            <h2 className="text-xl sm:text-3xl font-ndot font-bold text-stone-950 tracking-wider">
-              VERIFIED BUYER TELEMETRY
-            </h2>
-            <p className="text-xs text-stone-600">
-              50,000+ jewellery orders delivered across 28,000+ Indian PIN codes.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-white border border-[#e6e2d8] space-y-3 shadow-xs">
-              <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  ))}
-                </div>
-                <span className="text-[10px] text-[#b91c1c] font-bold">5.0 / 5.0</span>
-              </div>
-              <p className="text-xs text-stone-700 leading-relaxed italic">
-                &ldquo;Ordered the Kundan Choker necklace set for my sister’s sangeet in Jaipur. The shine of the stones and soft dori felt so luxurious. Looked just like jewelry from Tanishq or Sabyasachi at 1/10th the price!&rdquo;
-              </p>
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                <strong className="text-stone-950">Pooja Agarwal</strong>
-                <span className="text-[10px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">[ VERIFIED // JAIPUR ]</span>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white border border-[#e6e2d8] space-y-3 shadow-xs">
-              <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  ))}
-                </div>
-                <span className="text-[10px] text-[#b91c1c] font-bold">5.0 / 5.0</span>
-              </div>
-              <p className="text-xs text-stone-700 leading-relaxed italic">
-                &ldquo;The Lakshmi Temple Jhumkas have exquisite antique gold finish. No color fading or skin irritation even after wearing for 12 hours at Diwali pooja. Fast delivery in 2 days to Bangalore.&rdquo;
-              </p>
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                <strong className="text-stone-950">Kavita Sundaram</strong>
-                <span className="text-[10px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">[ VERIFIED // BANGALORE ]</span>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-white border border-[#e6e2d8] space-y-3 shadow-xs">
-              <div className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  ))}
-                </div>
-                <span className="text-[10px] text-[#b91c1c] font-bold">5.0 / 5.0</span>
-              </div>
-              <p className="text-xs text-stone-700 leading-relaxed italic">
-                &ldquo;The Rajwadi openable kadas fit true to size. The velvet box and authentic packaging gave such a boutique touch. Truly the best jewellery shopping platform in India!&rdquo;
-              </p>
-              <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
-                <strong className="text-stone-950">Sneha Kulkarni</strong>
-                <span className="text-[10px] text-emerald-800 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">[ VERIFIED // PUNE ]</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
