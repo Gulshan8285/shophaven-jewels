@@ -79,8 +79,8 @@ export default function Header() {
   return (
     <div className="sticky top-0 z-40 w-full text-stone-900 px-2 sm:px-4 pt-1.5 sm:pt-2.5 transition-all">
       
-      {/* 1. Top Announcement & Embedded Search Bar (Creamy Luxury Header) */}
-      <div className="max-w-7xl mx-auto mb-2 px-3 py-1.5 rounded-xl bg-[#f5f2eb]/95 backdrop-blur-md border border-[#e6e2d8] flex flex-wrap items-center justify-between gap-2 text-xs font-mono shadow-xs">
+      {/* 1. Top Announcement & Embedded Search Bar (Hidden on phone/mobile as requested) */}
+      <div className="hidden md:flex max-w-7xl mx-auto mb-2 px-3 py-1.5 rounded-xl bg-[#f5f2eb]/95 backdrop-blur-md border border-[#e6e2d8] items-center justify-between gap-2 text-xs font-mono shadow-xs">
         
         {/* Left: Animated Status Ticker */}
         <div className="flex items-center gap-2 truncate max-w-xs sm:max-w-md">
