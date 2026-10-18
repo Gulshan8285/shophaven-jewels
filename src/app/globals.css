@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: #faf8f5; /* Warm creamy ivory */
+    --foreground: #141416; /* Crisp obsidian */
+    --card: #ffffff;
+    --card-foreground: #141416;
+    --popover: #ffffff;
+    --popover-foreground: #141416;
+    --primary: #b91c1c; /* Luxury artisan crimson */
+    --primary-foreground: #ffffff;
+    --secondary: #f4f1ea; /* Soft creamy sand */
+    --secondary-foreground: #1c1c21;
+    --muted: #f4f1ea;
+    --muted-foreground: #716e68;
+    --accent: #b91c1c;
+    --accent-foreground: #ffffff;
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --border: #e6e2d8; /* Warm refined border */
+    --input: #e6e2d8;
+    --ring: #b91c1c;
+    --radius: 0.85rem;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-space-grotesk), sans-serif;
+    letter-spacing: -0.015em;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-space-grotesk), sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-geist-mono), monospace;
+  }
+
+  .font-ndot {
+    font-family: 'Silkscreen', monospace;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* Creamy Luxury Dot Matrix & Glyph Textures */
+.dot-matrix {
+  background-image: radial-gradient(#d6d3c8 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+.dot-matrix-dense {
+  background-image: radial-gradient(#c5c1b4 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Translucent Glass Panels (Creamy Luxury) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(230, 226, 216, 0.85);
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(185, 28, 28, 0.35);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 12px 28px -5px rgba(28, 25, 23, 0.06);
+}
+
+/* Crimson Glyph Pulse */
+.glyph-pulse {
+  animation: glyphGlow 2s infinite ease-in-out;
+}
+
+@keyframes glyphGlow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(185, 28, 28, 0.5);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+    box-shadow: 0 0 3px rgba(185, 28, 28, 0.2);
+  }
+}
+
+/* Custom Sleek Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #faf8f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #d6d3c8;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #b8b4a7;
+}
